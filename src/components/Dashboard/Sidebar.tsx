@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Menu } from "lucide-react";
 import { CalendarDays } from "lucide-react";
 import { Home } from "lucide-react";
+import { MapPin } from "lucide-react";
 const items = [
   {
   label: "Home",
@@ -19,8 +20,14 @@ const items = [
   path: "/appointments",
   icon: CalendarDays,
 },
+{
+  label: "Nearby Hospitals",
+  path: "/nearby-hospitals",
+  icon: MapPin,
+},
   { label: "Health Insights", path: "/insights", icon: Sparkles },
   { label: "Settings", path: "/settings", icon: Settings },
+ 
   
   
 ];

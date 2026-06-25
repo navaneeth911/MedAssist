@@ -13,6 +13,7 @@ import Appointments from "./pages/Appointments";
 import Profile from "./pages/profile";
 import Settings from "./pages/Settings";
 import HealthInsights from "./pages/HealthInsights";
+import NearbyHospitals from "./pages/NearbyHospitals";
 function App() {
   return (
     <BrowserRouter>
@@ -36,6 +37,14 @@ function App() {
           <Route path="/history" element={<History />} />
           <Route path="/insights" element={<HealthInsights />} />
           <Route path="/settings" element={<Settings />} />
+          <Route
+  path="/nearby-hospitals"
+  element={
+    <ProtectedRoute>
+      <NearbyHospitals />
+    </ProtectedRoute>
+  }
+/>
           <Route
   path="/profile"
   element={<Profile />}

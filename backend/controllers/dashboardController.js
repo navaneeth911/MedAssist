@@ -31,11 +31,32 @@ export const getDashboardStats = async (
         .sort({ createdAt: -1 })
         .limit(5);
 
+    const latestAssessment =
+  recentAssessments.length > 0
+    ? recentAssessments[0]
+    : null;
+
+    const riskMap = {
+  Low: 1,
+  Medium: 2,
+  High: 3,
+  Emergency: 4,
+};
+
+const chartData = recentAssessments
+  .reverse()
+  .map((assessment, index) => ({
+    assessment: `A${index + 1}`,
+    risk: riskMap[assessment.risk] || 0,
+  }));
+console.log(chartData);
     res.json({
       totalAppointments,
       totalAssessments,
       recentAppointments,
       recentAssessments,
+      latestRisk: latestAssessment?.risk || "None",
+       chartData,
     });
   } catch (error) {
     console.error(error);

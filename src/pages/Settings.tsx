@@ -488,7 +488,10 @@ function AppearanceSection() {
     <SectionCard icon={Palette} title="Appearance" description="Customize how MedAssist looks.">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:items-center">
         <div className="space-y-1.5">
-          <Label className="text-slate-700">Theme</Label>
+          <Label className="
+  text-slate-700
+  dark:text-slate-200
+">Theme</Label>
           <Select value={theme} onValueChange={(value) => updateTheme(value as ThemeMode)}>
             <SelectTrigger>
               <SelectValue placeholder="Select theme" />
@@ -1080,7 +1083,11 @@ function AccountSection() {
 
 export default function Settings() {
   return (
-    <div className="min-h-screen bg-slate-50/60">
+    <div className="
+  min-h-screen
+  bg-slate-50/60
+  dark:bg-slate-900
+">
       <PageHeader title="Settings" />
       <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
         <header className="mb-8">

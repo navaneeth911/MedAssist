@@ -122,7 +122,15 @@ const CHART = {
 /* -------------------------------------------------------------------------- */
 
 function RiskBadge({ level }: { level: RiskLevel }) {
-  const c = RISK_COLORS[level];
+  console.log("Risk level received:", level);
+
+  const c = RISK_COLORS[level] || {
+    bg: "bg-gray-100",
+    text: "text-gray-700",
+    ring: "ring-gray-300",
+    dot: "bg-gray-500",
+  };
+
   return (
     <span
       className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium ring-1 ${c.bg} ${c.text} ${c.ring}`}
@@ -521,7 +529,13 @@ useEffect(() => {
         }
       );
 
-      const insights = await response.json();
+      console.log("Insights Status:", response.status);
+
+const text = await response.text();
+
+console.log("Insights Response:", text);
+
+const insights = JSON.parse(text);
 
       console.log(insights);
 

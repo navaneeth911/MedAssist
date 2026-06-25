@@ -211,12 +211,17 @@ setLoading(false);
 };
 
 
- const riskColor =
-  result.includes("High")
-    ? "#ef4444"
-    : result.includes("Medium")
-    ? "#f59e0b"
-    : "#22c55e";
+ const risk = result.split("Risk: ")[1]?.split("\n")[0]?.trim();
+
+const riskColors = {
+  Low: "#22c55e",
+  Medium: "#eab308",
+  High: "#ea580c",
+  Emergency: "#dc2626",
+};
+
+const riskColor =
+  riskColors[risk as keyof typeof riskColors] || "#64748b";
 
     
   return (
@@ -404,108 +409,108 @@ setLoading(false);
   </div>
 )}
 {result && (
+    <div
+      style={{
+        marginTop: "30px",
+        background: "#1e293b",
+        color: "white",
+        padding: "25px",
+        borderRadius: "16px",
+        whiteSpace: "pre-line",
+      }}
+    >
+      <h3>Analysis Result</h3>
+      <div
+    style={{
+      display: "grid",
+      gap: "20px",
+      marginTop: "25px",
+    }}
+  >
+    
+
+      <div
+    style={{
+      background: "#0f172a",
+      padding: "20px",
+      borderRadius: "16px",
+    }}
+  >
+    <ShieldAlert
+      size={28}
+      color={riskColor}
+    />
+
+    <h3>Risk Level</h3>
+
+    <p
+      style={{
+        color: riskColor,
+        fontWeight: "bold",
+      }}
+    >
+      {result.split("Risk: ")[1]?.split("\n")[0]}
+    </p>
+  </div>
+
   <div
     style={{
-      marginTop: "30px",
-      background: "#1e293b",
-      color: "white",
-      padding: "25px",
+      background: "#0f172a",
+      padding: "20px",
       borderRadius: "16px",
-      whiteSpace: "pre-line",
     }}
   >
-    <h3>Analysis Result</h3>
-    <div
-  style={{
-    display: "grid",
-    gap: "20px",
-    marginTop: "25px",
-  }}
->
-  
+    <Activity size={28} color="#60a5fa" />
 
-    <div
-  style={{
-    background: "#0f172a",
-    padding: "20px",
-    borderRadius: "16px",
-  }}
->
-  <ShieldAlert
-    size={28}
-    color={riskColor}
-  />
+    <h3>Condition</h3>
 
-  <h3>Risk Level</h3>
+    <p>
+      {result
+        .split("Condition: ")[1]
+        ?.split("Specialist")[0]}
+    </p>
+  </div>
 
-  <p
+  <div
     style={{
-      color: riskColor,
-      fontWeight: "bold",
+      background: "#0f172a",
+      padding: "20px",
+      borderRadius: "16px",
     }}
   >
-    {result.split("Risk: ")[1]?.split("\n")[0]}
-  </p>
-</div>
+    <Stethoscope
+      size={28}
+      color="#60a5fa"
+    />
 
-<div
+    <h3>Recommended Specialist</h3>
+
+    <p>{specialist}</p>
+  </div>
+
+    <button
+    onClick={() => {
+    console.log("Doctor button clicked");
+
+    navigate("/doctors", {
+      state: {
+        specialist,
+        messages,
+      },
+    });
+  }}
   style={{
-    background: "#0f172a",
-    padding: "20px",
-    borderRadius: "16px",
-  }}
->
-  <Activity size={28} color="#60a5fa" />
-
-  <h3>Condition</h3>
-
-  <p>
-    {result
-      .split("Condition: ")[1]
-      ?.split("Specialist")[0]}
-  </p>
-</div>
-
-<div
-  style={{
-    background: "#0f172a",
-    padding: "20px",
-    borderRadius: "16px",
-  }}
->
-  <Stethoscope
-    size={28}
-    color="#60a5fa"
-  />
-
-  <h3>Recommended Specialist</h3>
-
-  <p>{specialist}</p>
-</div>
-
-  <button
-  onClick={() => {
-  console.log("Doctor button clicked");
-
-  navigate("/doctors", {
-    state: {
-      specialist,
-      messages,
-    },
-  });
-}}
-style={{
-    marginTop: "20px",
-    background: "#2563eb",
-    color: "white",
-    border: "none",
-    padding: "14px 30px",
-    borderRadius: "12px",
-    cursor: "pointer",
-    fontWeight: "bold",
-    fontSize: "16px",
-  }}
->
+      marginTop: "20px",
+      background: "#2563eb",
+      color: "white",
+      border: "none",
+      padding: "14px 30px",
+      borderRadius: "12px",
+      cursor: "pointer",
+      fontWeight: "bold",
+      fontSize: "16px",
+    }}
+  >
   View Recommended Specialists →
 </button>
 

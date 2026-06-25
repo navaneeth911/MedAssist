@@ -10,21 +10,27 @@ import dashboardRoutes from "./routes/dashboardRoutes.js";
 import doctorRoutes from "./routes/doctorRoutes.js";
 import insightsRoutes from "./routes/InsightsRoutes.js";
 import { startAppointmentReminderScheduler } from "./services/appointmentReminderService.js";
+import hospitalRoutes from "./routes/hospitalRoutes.js";
 dotenv.config();
 console.log(process.env.MONGODB_URI);
 
 connectDB();
 const app = express();
 
+
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:5174",
+    ],
     credentials: true,
   })
 );
 
-
 app.use(express.json());
+app.use("/api", hospitalRoutes);
 app.use(
   "/api/appointments",
   appointmentRoutes
